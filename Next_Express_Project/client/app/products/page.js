@@ -39,10 +39,13 @@ export default function Home() {
       </Link>
     </nav>
 
-    <h1 className="mt-11 mb-11" > List of Products from backend - /api/v1/products/ from Postgress DB  </h1>
-    <div className="bg-slate-800 p-6 rounded-md bg-gradient-to-r from-slate-600 to-slate-900 ">
+    <div className="bg-slate-900 p-8 mt-10 rounded-lg">
+    <h1 className="mt-11 mb-11" > List of <span className="text-xl text-blue-500"> Products </span>  from backend - /api/v1/products/ from <span className="text-xl text-blue-500"> Postgress DB </span>  </h1>
+    <div className="bg-slate-800 p-6 rounded-md bg-gradient-to-r from-blue-800 to-slate-900 ">
     {products.length>0 ? products.map((elem, index)=> (<p className="mb-2 text-nowrap" key={elem.id} > Product-Name - {elem.name} & its price is {elem.price}</p>)): "No products found - Add products from Home page"}
     </div>
+    </div>
+
     </main>
   );
 }

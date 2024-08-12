@@ -114,20 +114,18 @@ export default function Home() {
       </Link>
     </nav>
 
-    <h1 className="mt-5"> I am from NextJs - Coming from /api/v1</h1>
+    <div className="mainbox bg-slate-900 p-10 mt-10">
     {/* Message from Backend */}
-    {message}
+    🔥 {message}
 
     {/* Creating an input form to collect data from users  */}
-    <h1 className="mt-5"> Create the users - This will go to /api/v1/users on MongoDB</h1>
+    <h1 className="mt-20"> ✅ Create the <span className="text-red-500 text-2xl"> users </span>  - This will go to /api/v1/users on <span className="text-red-500 text-2xl"> MongoDB </span></h1>
     <div className="usersform bg-slate-700 p-3 rounded-md mt-4 bg-gradient-to-r from-slate-600 to-slate-900">
 
     <form onSubmit={handleSubmit}>
       <div>
       <input className=" text-slate-950 rounded-md mr-2 placeholder-slate-400 focus:outline-none mt-1 px-2 py-2" type="text" value={name} onChange={handleNameChange} placeholder="John" />
       <input className=" text-slate-950 rounded-md mr-2 placeholder-slate-400 focus:outline-none mt-1 px-2 py-2" type="text" value={profit} onChange={handleProfitChange} placeholder="$300" />
-      </div>
-      <div className="flex justify-center">
       <button className="px-2 py-1 rounded-md bg-green-500 hover:bg-green-700 mt-2" type="submit" > Create User</button>
       </div>
     </form>
@@ -135,21 +133,19 @@ export default function Home() {
     </div>
 
     {/* Product Form  */}
-    <h1 className="mt-5"> Create the Products - This will go to /api/v1/products on postgres</h1>
+    <h1 className="mt-20"> ✅ Create the <span className="text-red-500 text-2xl"> Products </span>  - This will go to /api/v1/products on <span className="text-red-500 text-2xl"> postgres </span></h1>
     <div className="productform bg-slate-700 p-3 rounded-md mt-4 bg-gradient-to-r from-slate-600 to-slate-900">
 
     <form onSubmit={handleProdSubmit}>
       <div>
       <input className=" text-slate-950 rounded-md mr-2 placeholder-slate-400 focus:outline-none mt-1 px-2 py-2" type="text" value={productName} onChange={handleProdNameChange} placeholder="Product Name" />
       <input className=" text-slate-950 rounded-md mr-2 placeholder-slate-400 focus:outline-none mt-1 px-2 py-2" type="text" value={productPrice} onChange={handleProdPriceChange} placeholder="Product price, eg:1000" />
-      </div>
-      <div className="flex justify-center">
       <button className="px-2 py-1 rounded-md bg-green-500 hover:bg-green-700 mt-2" type="submit" > Create Products</button>
       </div>
     </form>
-
     </div>
 
+    </div>
     </main>
   )
 }

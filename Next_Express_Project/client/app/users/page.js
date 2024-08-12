@@ -38,9 +38,13 @@ export default function Home() {
       </Link>
     </nav>
 
-    <h1 className="mt-11 mb-11" > List of users from backend - /api/v1/users/ from Mongo DB  </h1>
-    <div className="bg-slate-800 p-6 rounded-md bg-gradient-to-r from-slate-600 to-slate-900 ">
-    {users.map((elem, index)=> (<p className="mb-2 text-nowrap" key={elem._id} > Hello - {elem.Name}, You made profit of {elem.Profit}</p>))}
+    <div className="bg-slate-900 p-8 mt-10 rounded-lg">
+
+    <h1 className="mt-11 mb-11" > List of <span className="text-lg text-red-500"> users</span>  from backend - /api/v1/users/ from <span className="text-lg text-red-500"> Mongo DB </span>  </h1>
+    <div className="bg-slate-900 p-6 rounded-md bg-gradient-to-r from-red-800 to-black-900 ">
+    {users.map((elem, index)=> (<p className="mb-2 text-nowrap" key={elem._id} > Hello - <span className="text-xl text-cyan-200">{elem.Name}</span>, You made profit of: <span className="text-xl text-cyan-200"> {elem.Profit} </span> </p>))}
+    </div>
+
     </div>
     </main>
   );
