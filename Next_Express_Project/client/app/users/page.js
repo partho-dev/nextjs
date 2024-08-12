@@ -24,17 +24,18 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col  items-center">
 
-    <nav className=" w-full bg-slate-800 flex justify-around p-2">
+    
+<nav className=" w-full bg-slate-800 flex justify-around p-2">
       <Link href={"/"}>
-      <p className=" cursor-pointer "> Home </p>
+      <p className=" cursor-pointer p-2 rounded-md hover:bg-sky-700"> Home </p>
       </Link>
       
       <Link href={"/users"}>
-      <p className=" cursor-pointer "> Users </p>
+      <p className=" cursor-pointer p-2 rounded-md hover:bg-sky-700 "> Users </p>
       </Link>
 
       <Link href={"/products"}>
-      <p className=" cursor-pointer "> Product </p>
+      <p className=" cursor-pointer p-2 rounded-md  hover:bg-sky-700"> Product </p>
       </Link>
     </nav>
 
