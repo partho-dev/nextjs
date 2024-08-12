@@ -6,7 +6,7 @@ require("dotenv").config()
 
 // require the Databases
 const mongoose = require("mongoose") // Mongo
-const pool = require("./config/pgdb") // Postgress 
+const sequelize = require('./config/pgdb') // Postgres
 
 const userRouter = require("./router/users.router")
 const productRouter = require("./router/productsPG.router")
@@ -21,31 +21,6 @@ app.use(express.json())
 //API Routing
 app.use("/api/v1", userRouter)
 app.use("/api/v1", productRouter)
-
-//Product Routes
-//create Products
-// app.post("/api/v1/products", async (req, res)=>{
-//     try {
-//         const {name, price} = req.body
-//         const newProduct = await pool.query("INSERT INTO products (name, price) VALUES($1, $2) RETURNING *", [name, price] )
-//         res.json(newProduct.rows[0])
-
-//     } catch (error) {
-//         console.log(error.message)
-//     }
-// })
-
-// //List products
-// app.get("/api/v1/products", async (req, res)=>{
-//     try {
-//         const allproducts = await pool.query("select * from products")
-//         res.json(allproducts.rows)
-        
-//     } catch (error) {
-//         console.log(error.message)
-        
-//     }
-// })
 
 // DB Connection (Mongoose)
 const mongoDB = async ()=> {
@@ -66,8 +41,8 @@ try {
     await mongoDB()
     console.log("Mongo is connected")
 
-    await pool.connect()
-    console.log("Postgress is connected")
+    await sequelize.authenticate(); // Verifies the connection
+    console.log("PostgreSQL is connected via Sequelize");
 
     app.listen(process.env.PORT, ()=>{
         console.log(`Server is listening on port ${process.env.PORT}`)

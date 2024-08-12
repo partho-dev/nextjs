@@ -1,5 +1,5 @@
 const express = require("express")
-// const { getUsers, createUsers, homeData } = require("../controllers/users.controller")
+
 const {createProducts, getProducts, deleteProduct } = require("../controllers/productsPG.controller")
 const router = express.Router()
 
