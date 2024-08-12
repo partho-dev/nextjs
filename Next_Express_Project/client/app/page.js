@@ -9,7 +9,10 @@ export default function Home() {
   const [message, setMessage ] = useState("...Loading")
   const [name, setName ] = useState()
   const [profit, setProfit] = useState()
+  const [productName, setProductName] = useState()
+  const [productPrice, setProdPrice] = useState()
 
+  // Manage the state of user data
   const handleNameChange = (e) =>{
     setName(e.target.value)
   }
@@ -18,6 +21,16 @@ export default function Home() {
     setProfit(e.target.value)
   }
 
+  // Manage the state of Products
+  const handleProdNameChange = (e) =>{
+    setProductName(e.target.value)
+  }
+
+  const handleProdPriceChange = (e) =>{
+    setProdPrice(e.target.value)
+  }
+
+  // Handle the submit for User Data
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -29,19 +42,47 @@ export default function Home() {
 
     const newUser = {
       Name: name,
-      Profit: profit,
-    };
+      Profit: profit
+    }
+
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`, newUser)
-      setMessage(`User created: ${response.data.Name} with a profit of ${response.data.Profit}`)
+      const userResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`, newUser)
+      setMessage(`User created: ${userResponse.data.Name} with a profit of ${userResponse.data.Profit}`)
       setName("")  // Clear the form fields
       setProfit("") // Clear the form fields
     } catch (error) {
       console.error("Error creating user", error)
       setMessage("Error creating user")
     }
-  };
+  }
+
+    // Handle the submit for Product Data
+    const handleProdSubmit = async (e) => {
+      e.preventDefault()
+  
+      // Checking if the input fields are not empty
+      if(!productName.trim() || !productPrice.trim()){
+        setMessage("Please ensure, none of the fields be empty")
+        return // This prevents the submit
+      } 
+  
+      const newProd = {
+        name: productName,
+        price: productPrice,
+      }
+  
+  
+      try {
+        const prodResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products`, newProd)
+        // setMessage(`User created: ${prodResponse.data.Name} with a profit of ${prodResponse.data.Profit}`)
+        setProductName("")  // Clear the form fields
+        setProdPrice("") // Clear the form fields
+      } catch (error) {
+        console.error("Error creating Products", error)
+        setMessage("Error creating Products")
+      }
+    }
 
   useEffect(()=>{
     const fetchdata = async ()=>{
@@ -67,6 +108,10 @@ export default function Home() {
       <Link href={"/users"}>
       <p className=" cursor-pointer "> Users </p>
       </Link>
+
+      <Link href={"/products"}>
+      <p className=" cursor-pointer "> Product </p>
+      </Link>
     </nav>
 
     <h1 className="mt-5"> I am from NextJs - Coming from /api/v1</h1>
@@ -74,8 +119,8 @@ export default function Home() {
     {message}
 
     {/* Creating an input form to collect data from users  */}
-    <h1 className="mt-5"> Create the users - This will go to /api/v1/users</h1>
-    <div className="bg-slate-700 p-3 rounded-md mt-4">
+    <h1 className="mt-5"> Create the users - This will go to /api/v1/users on MongoDB</h1>
+    <div className="usersform bg-slate-700 p-3 rounded-md mt-4 bg-gradient-to-r from-slate-600 to-slate-900">
 
     <form onSubmit={handleSubmit}>
       <div>
@@ -83,11 +128,28 @@ export default function Home() {
       <input className=" text-slate-950 rounded-md mr-2 placeholder-slate-400 focus:outline-none mt-1 px-2 py-2" type="text" value={profit} onChange={handleProfitChange} placeholder="$300" />
       </div>
       <div className="flex justify-center">
-      <button className="px-2 py-1 rounded-md bg-green-600 mt-2" type="submit" > Create User</button>
+      <button className="px-2 py-1 rounded-md bg-green-500 hover:bg-green-700 mt-2" type="submit" > Create User</button>
       </div>
     </form>
 
     </div>
+
+    {/* Product Form  */}
+    <h1 className="mt-5"> Create the Products - This will go to /api/v1/products on postgres</h1>
+    <div className="productform bg-slate-700 p-3 rounded-md mt-4 bg-gradient-to-r from-slate-600 to-slate-900">
+
+    <form onSubmit={handleProdSubmit}>
+      <div>
+      <input className=" text-slate-950 rounded-md mr-2 placeholder-slate-400 focus:outline-none mt-1 px-2 py-2" type="text" value={productName} onChange={handleProdNameChange} placeholder="Product Name" />
+      <input className=" text-slate-950 rounded-md mr-2 placeholder-slate-400 focus:outline-none mt-1 px-2 py-2" type="text" value={productPrice} onChange={handleProdPriceChange} placeholder="Product price, eg:1000" />
+      </div>
+      <div className="flex justify-center">
+      <button className="px-2 py-1 rounded-md bg-green-500 hover:bg-green-700 mt-2" type="submit" > Create Products</button>
+      </div>
+    </form>
+
+    </div>
+
     </main>
-  );
+  )
 }

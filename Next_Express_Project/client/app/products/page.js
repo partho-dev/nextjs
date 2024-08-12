@@ -6,14 +6,15 @@ import Link from "next/link";
 const base_url = process.env.NEXT_PUBLIC_API_BASE_URL
 
 export default function Home() {
-  const [users, setUsers] = useState([])
+//   const [users, setUsers] = useState([])
+  const [products, setProducts] = useState([])
 
   useEffect(()=>{
-    const userapi = `${base_url}/users/`
+    const prodapi = `${base_url}/products/`
     const fetchdata = async () =>{
       try {
-        const response = await axios.get(userapi)
-        setUsers(response.data)
+        const response = await axios.get(prodapi)
+        setProducts(response.data)
       } catch (error) {
         
       }
@@ -38,9 +39,9 @@ export default function Home() {
       </Link>
     </nav>
 
-    <h1 className="mt-11 mb-11" > List of users from backend - /api/v1/users/ from Mongo DB  </h1>
+    <h1 className="mt-11 mb-11" > List of Products from backend - /api/v1/products/ from Postgress DB  </h1>
     <div className="bg-slate-800 p-6 rounded-md bg-gradient-to-r from-slate-600 to-slate-900 ">
-    {users.map((elem, index)=> (<p className="mb-2 text-nowrap" key={elem._id} > Hello - {elem.Name}, You made profit of {elem.Profit}</p>))}
+    {products.length>0 ? products.map((elem, index)=> (<p className="mb-2 text-nowrap" key={elem.id} > Product-Name - {elem.name} & its price is {elem.price}</p>)): "No products found - Add products from Home page"}
     </div>
     </main>
   );
